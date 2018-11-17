@@ -7,13 +7,13 @@ let money = prompt("Ваш бюджет на месяц", ""),
 
 //Пункт 4. Задать пользователю по 2 раза вопросы
 
-let firstQuestion1 = prompt("Введите обязательную статью расходов в этом месяце", ""),
-    secondQuestion1 = prompt("Во сколько обойдется?", ""),
-    firstQuestion2 = prompt("Введите обязательную статью расходов в этом месяце", ""),
-    secondQuestion2 = prompt("Во сколько обойдется?", "");
+let firstQuestion = prompt("Введите обязательную статью расходов в этом месяце", ""),
+    firstAnswer = prompt("Во сколько обойдется?", ""),
+    secondQuestion = prompt("Введите обязательную статью расходов в этом месяце", ""),
+    secondAnswer = prompt("Во сколько обойдется?", "");
 var expenses = {};
-expenses[firstQuestion1] = secondQuestion1;
-expenses[firstQuestion2] = secondQuestion2;
+expenses[firstQuestion] = firstAnswer;
+expenses[secondQuestion] = secondAnswer;
 
 
 //Пункт 3. Создали объект

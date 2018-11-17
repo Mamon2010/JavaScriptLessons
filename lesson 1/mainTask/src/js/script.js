@@ -11,7 +11,7 @@ let firstQuestion = prompt("Введите обязательную статью
     firstAnswer = prompt("Во сколько обойдется?", ""),
     secondQuestion = prompt("Введите обязательную статью расходов в этом месяце", ""),
     secondAnswer = prompt("Во сколько обойдется?", "");
-var expenses = {};
+let expenses = {};
 expenses[firstQuestion] = firstAnswer;
 expenses[secondQuestion] = secondAnswer;
 

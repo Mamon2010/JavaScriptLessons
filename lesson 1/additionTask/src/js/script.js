@@ -10,11 +10,9 @@ let num = 33721,
 
 for (let i = 0; i < snum.length; i++) {
     arrnum.push(+snum.charAt(i));
-}
-
-for (let i = 0; i < arrnum.length; i++) {
     multiply *= arrnum[i];
 }
+
 console.log(multiply);
 
 /* 

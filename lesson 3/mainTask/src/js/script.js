@@ -2,6 +2,7 @@
 
 let money, time;
 
+//Задать функцию start (из видеоурока)
 function start() {
     //Пункт 2. Создали 2 переменные
     money = +prompt("Ваш бюджет на месяц", "");
@@ -14,7 +15,6 @@ function start() {
 
 start();
 
-//Пункт 3. Создали объект
 let appData = {
     budjet: money,
     timeData: time,
@@ -24,16 +24,13 @@ let appData = {
     savings: true
 };
 
-//Пункт 4. Задать пользователю по 2 раза вопросы переписанный 
-// Способ 1
-
+//Задать функцию chooseExpenses (из видеоурока)
 function chooseExpenses() {
     for (let i = 0; i < 2; i++) {
         let a = prompt("Введите обязательную статью расходов в этом месяце", ""),
             b = prompt("Во сколько обойдется?", "");
-    
+
         if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-            console.log("done");
             appData.expenses[a] = b;
         } else {
             i--;
@@ -43,62 +40,54 @@ function chooseExpenses() {
 
 chooseExpenses();
 
-// Способ 2
+/* 1. Оформить расчет дневного бюджета и вывод на экран 
+этого значения как одну функцию(detectDayBudget) */
+function detectDayBudget() {
+    appData.moneyPerDay = (appData.budjet / 30).toFixed();
+    return alert('Ваш бюджет на день ' + appData.moneyPerDay + ' рублей.');
+}
 
-/* let i = 0;
-do {
-    i++;
-    let a = prompt("Введите обязательную статью расходов в этом месяце", ""),
-        b = prompt("Во сколько обойдется?", "");
-    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-        console.log("done");
-        appData.expenses[a] = b;
+detectDayBudget();
 
-    } else {
-        i--;
+/* 2. Оформить блок кода с расчетом уровня достатка 
+как отдельную функцию (detectLevel) */
+function detectLevel() {
+    var sText;
+    if (appData.moneyPerDay < 100) {
+        sText = "Минимальный доход";
+    } else if (appData.moneyPerDay < 100 && appData.moneyPerDay < 300) {
+        sText = "Средний доход";
+    } else if (appData.moneyPerDay > 300 && appData.moneyPerDay < 2000) {
+        sText = "Хороший доход";
     }
+    return alert(sText);
 }
-while (i < 2); */
 
-// Способ 3
+detectLevel();
 
-/* while (i < 2) {
-    i++;
-    let a = prompt("Введите обязательную статью расходов в этом месяце", ""),
-        b = prompt("Во сколько обойдется?", "");
-    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-        console.log("done");
-        appData.expenses[a] = b;  
-    } else {
-        i--;
-    }
-}
- */
-
-// Определение дохода пользователя и вывод сообщения о нем на экран
-appData.moneyPerDay = (appData.budjet / 30).toFixed();
-
-
-var sText;
-if (appData.moneyPerDay < 100) {
-    sText = "Минимальный доход";
-} else if (appData.moneyPerDay < 100 && appData.moneyPerDay < 300) {
-    sText = "Средний доход";
-} else if (appData.moneyPerDay > 300 && appData.moneyPerDay < 2000) {
-    sText = "Хороший доход";
-}
-alert('Ваш бюджет на день ' + appData.moneyPerDay + ' рублей.' + "<br>Это " + sText);
-
-console.log(appData);
-
-
+//Задать функцию checkSavings (из видеоурока)
 function checkSavings() {
-    if(appData.savings==true){
-        let save=+prompt('Какова сумма накоплений?'),
-        percent=+prompt('Под какой процент?');
+    if (appData.savings == true) {
+        let save = +prompt('Какова сумма накоплений?'),
+            percent = +prompt('Под какой процент?');
 
-        appData.monthIncome = save/100/12*percent;
-        alert("Доход с накоплений " + appData.monthIncome);
+        appData.monthIncome = save / 100 / 12 * percent;
     }
+    return alert("Доход с накоплений " + appData.monthIncome);
 }
 checkSavings();
+
+/* 3. Создать функцию для определения 
+необязательных расходов (chooseOptExpenses) */
+function chooseOptExpenses() {
+    for (let i = 0; i < 3; i++) {
+        let answerQuestion = prompt('Статья необязательных расходов?');
+        if (answerQuestion != null && answerQuestion != '') {
+            appData.optionalExpenses[i] = answerQuestion;
+        } else {
+            i--;
+        }
+    }
+}
+chooseOptExpenses();
+console.log(appData);

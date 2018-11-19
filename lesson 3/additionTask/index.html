@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="src/js/script.js"></script>
+</head>
+
+<body>
+    <div id="res0"></div>
+    <div id="res1"></div>
+    <div id="res2"></div>
+    <div id="res3"></div>
+    <div id="res4"></div>
+    <div id="res5"></div>
+    <div id="res6"></div>
+
+    <script>
+        //1.Создать массив week и записать в него дни недели в виде строк
+        let week = new Array("Понедельник", "Вторник", "Среда", "Четверг", "Пятница",
+            "Суббота", "Воскресение");
+        for (let i = 0; i < week.length; i++) {
+            let res = 'res' + i;
+            switch (week[i]) {
+                case 'Суббота':
+                    {
+                        document.getElementById(res).innerHTML = week[i].bold().italics();
+                    }
+                    break;
+                case 'Воскресение':
+                    {
+                        document.getElementById(res).innerHTML = week[i].bold();
+                    }
+                    break;
+
+                default:
+                    {
+                        document.getElementById(res).innerHTML = week[i];
+                    }
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>

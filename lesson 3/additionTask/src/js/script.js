@@ -1,37 +1,38 @@
-//1. Создать массив week и записать в него дни недели в виде строк
-// let week = new Array("Понедельник", "Вторник", "Среда", "Четверг", "Пятница",
-//     "Суббота", "Воскресение");
-// for (let i = 0; i < week.length; i++) {
-//     let res = 'res' + i;
-//     switch (week[i]) {
-//         case 'Суббота':
-//             {
-//                 document.getElementById(res).innerHTML = week[i].bold().italics();
-//             }
-//             break;
-//         case 'Воскресение':
-//             {
-//                 document.getElementById(res).innerHTML = week[i].bold();
-//             }
-//             break;
+// 1) У вас есть str = “урок - 3 - был слишком легким”
+let str = '“урок - 3 - был слишком легким”';
+str = str.substring(0, 1) + str.charAt(1).toUpperCase() + str.substring(2);
+console.log(str);
 
-//         default:
-//             {
-//                 document.getElementById(res).innerHTML = week[i];
-//             }
-//             break;
-//     }
-// }
+// 2) Теперь замените все“ - ”на пробелы
+// str = str.slice(1, -1)
+str = str.replace('“', ' ').replace('”', '');
+console.log(str);
 
+/* 3) Из получившейся строки вырезать слово“ легким”, в
+этом же слове заменить 2 последние буквы на букву“ о” */
 
-//2. Создать массив arr = []
-let arrNum = ['123', '432', '237', '235', '1734', '553', '234'],
-    strNum = arrNum.toString();
-let arrSpecialNum = [];
+str = str.substr(str.indexOf('легким', 1), 6).replace('им', 'оо');
+console.log(str);
 
-for (let i = 0; i < strNum.length; i++) {
-    if (strNum[i] == 3 || strNum[i] == 7) {
-        arrSpecialNum.push(strNum[i]);
+// 4) У вас также есть массив arr = [20, 33, 1, “Человек”, 2, 3]
+
+let arr = [20, 33, 1, 'Человек', 2, 3];
+let sum = 0;
+for (let i = 0; i < arr.length; i++) {
+    if (!isNaN(arr[i])) {
+        sum += Math.pow(arr[i], 3);
     }
 }
-console.log(arrSpecialNum);
+
+console.log(Math.sqrt(sum));
+
+// 5) Создайте функцию, которая принимает 1 аргумент(название произвольное)
+function dopFive(x) {
+    if (typeof(x) == 'string') {
+        alert('Аргументом указана строка')
+        console.log('Аргументом указана строка');
+        console.log(x.trim().slice(0, 50) + '...');
+    }
+}
+
+dopFive('    Я иду опять домой лялвлваллалалалаллллллллллллллллллллллллллллллалалалалалала    ')

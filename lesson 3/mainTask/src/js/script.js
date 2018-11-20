@@ -80,7 +80,7 @@ checkSavings();
 /* 3. Создать функцию для определения 
 необязательных расходов (chooseOptExpenses) */
 function chooseOptExpenses() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 1; i < 4; i++) {
         let answerQuestion = prompt('Статья необязательных расходов?');
         if (answerQuestion != null && answerQuestion != '') {
             appData.optionalExpenses[i] = answerQuestion;

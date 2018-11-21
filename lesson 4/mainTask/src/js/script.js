@@ -2,18 +2,18 @@
 
 let money, time;
 
-//Задать функцию start (из видеоурока)
-function start() {
-    //Пункт 2. Создали 2 переменные
-    money = +prompt("Ваш бюджет на месяц", "");
-    time = prompt("Введите дату в формате YYYY-MM-DD", "");
+// //Задать функцию start (из видеоурока)
+// function start() {
+//     //Пункт 2. Создали 2 переменные
+//     money = +prompt("Ваш бюджет на месяц", "");
+//     time = prompt("Введите дату в формате YYYY-MM-DD", "");
 
-    while (money == "" || money == null || isNaN(money)) {
-        money = +prompt("Ваш бюджет на месяц", "");
-    }
-}
+//     while (money == "" || money == null || isNaN(money)) {
+//         money = +prompt("Ваш бюджет на месяц", "");
+//     }
+// }
 
-start();
+// start();
 
 let appData = {
     budjet: money,
@@ -22,11 +22,13 @@ let appData = {
     optionalExpenses: {},
     income: [],
     savings: true,
-    chooseExpenses: function() {
+
+    //Задать функцию chooseExpenses (из видеоурока)
+    chooseExpenses: function () {
         for (let i = 0; i < 2; i++) {
             let a = prompt("Введите обязательную статью расходов в этом месяце", ""),
                 b = prompt("Во сколько обойдется?", "");
-    
+
             if (a != null && b != null && a != '' && b != '' && a.length < 50) {
                 appData.expenses[a] = b;
             } else {
@@ -34,11 +36,17 @@ let appData = {
             }
         }
     },
-    detectDayBudget: function(){
+    /* 1. Оформить расчет дневного бюджета и вывод на экран 
+        этого значения как одну функцию(detectDayBudget) */
+
+    detectDayBudget: function () {
         appData.moneyPerDay = (appData.budjet / 30).toFixed();
         return alert('Ваш бюджет на день ' + appData.moneyPerDay + ' рублей.');
     },
-    detectLevel: function(){
+    /* 2. Оформить блок кода с расчетом уровня достатка 
+        как отдельную функцию (detectLevel) */
+
+    detectLevel: function () {
         var sText;
         if (appData.moneyPerDay < 100) {
             sText = "Минимальный доход";
@@ -49,16 +57,19 @@ let appData = {
         }
         return alert(sText);
     },
-    checkSavings: function(){
+    //Задать функцию checkSavings (из видеоурока)
+    checkSavings: function () {
         if (appData.savings == true) {
             let save = +prompt('Какова сумма накоплений?'),
                 percent = +prompt('Под какой процент?');
-    
+
             appData.monthIncome = save / 100 / 12 * percent;
         }
         return alert("Доход с накоплений " + appData.monthIncome);
     },
-    chooseOptExpenses: function(){
+    /* 3. Создать функцию для определения 
+        необязательных расходов (chooseOptExpenses) */
+    chooseOptExpenses: function () {
         for (let i = 1; i < 4; i++) {
             let answerQuestion = prompt('Статья необязательных расходов?');
             if (answerQuestion != null && answerQuestion != '') {
@@ -68,26 +79,37 @@ let appData = {
             }
         }
     },
-    chooseIncome:function(){
+    //Задать функцию chooseIncome (из видеоурока)
+    chooseIncome: function () {
+
+        //1) Написать проверку, что пользователь может:
+        //  · Ввести в дополнительных доходах (chooseIncome) только строку
+        //  · Не может оставить строку пустой
+        //  · Не может отменить вопрос 
+
         let items = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '');
-        appData.income = items.split(', ');
+        while (items == isNaN || items == null || items == '') {
+            items = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '');
+        }
+        appData.income = items.split(',');
         appData.income.push(prompt('Может что то ещё?'));
         appData.income.sort();
-    }  
+
+        // 2) При помощи метода перебора массива(forEach) вывести на экран сообщение 
+        // "Способы доп. заработка: " и полученные способы (внутри chooseIncome)
+        // · Товары должны начинаться с 1, а не с 0. Выполняем этот пункт в chooseIncome.
+
+        appData.income.forEach((item, i) => {
+            alert('Способы доп заработка: ' + appData.income);
+        });
+    }
 
 };
 
-//Задать функцию chooseExpenses (из видеоурока)
+for (const key in appData) {
+    console.log('Наша программа включает в себя данные: ' + key +': ' + appData[key]);
+}
 
-/* 1. Оформить расчет дневного бюджета и вывод на экран 
-этого значения как одну функцию(detectDayBudget) */
 
 
-/* 2. Оформить блок кода с расчетом уровня достатка 
-как отдельную функцию (detectLevel) */
-
-//Задать функцию checkSavings (из видеоурока)
-
-/* 3. Создать функцию для определения 
-необязательных расходов (chooseOptExpenses) */
 console.log(appData);

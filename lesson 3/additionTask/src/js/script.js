@@ -1,11 +1,11 @@
 // 1) У вас есть str = “урок - 3 - был слишком легким”
-let str = '“урок - 3 - был слишком легким”';
-str = str.substring(0, 1) + str.charAt(1).toUpperCase() + str.substring(2);
+let str = 'урок - 3 - был слишком легким';
+str = str.charAt(0).toUpperCase() + str.substring(1);
 console.log(str);
 
 // 2) Теперь замените все“ - ”на пробелы
 // str = str.slice(1, -1)
-str = str.replace('“', ' ').replace('”', '');
+str = str.replace(/-/g, ' ');  str.replace();
 console.log(str);
 
 /* 3) Из получившейся строки вырезать слово“ легким”, в

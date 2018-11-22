@@ -99,9 +99,8 @@ let appData = {
         // · Товары должны начинаться с 1, а не с 0. Выполняем этот пункт в chooseIncome.
 
         appData.income.forEach(function(item, i) {
-            let b = i;
-            ++b;
-            alert('Способы доп заработка: ' + b + ' ' + appData.income[i]);
+            ++i;
+            alert('Способы доп заработка: ' + i + ' ' + item);
         });
     }
 

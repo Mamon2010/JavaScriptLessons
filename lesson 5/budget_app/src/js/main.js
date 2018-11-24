@@ -3,14 +3,14 @@ let start = document.querySelector('#start');
 
 // · Получить все блоки в правой части программы через классы(которые имеют класс название - value, 
 // начиная с < div class = "budget-value" > < /div> и заканчивая <div class="yearsavings-value"></div > )
-let budgetValue = document.querySelectorAll('.budget-value'),
-    daybudgetValue = document.querySelectorAll('.daybudget-value'),
-    levelValue = document.querySelectorAll('.level-value'),
-    expensesValue = document.querySelectorAll('.expenses-value'),
-    optionalexpensesValue = document.querySelectorAll('.optionalexpenses-value'),
-    incomeValue = document.querySelectorAll('.income-value'),
-    monthsavingsValue = document.querySelectorAll('.monthsavings-value'),
-    yearsavingsValue = document.querySelectorAll('.yearsavings-value');
+let budgetValue = document.querySelector('.budget-value'),
+    daybudgetValue = document.querySelector('.daybudget-value'),
+    levelValue = document.querySelector('.level-value'),
+    expensesValue = document.querySelector('.expenses-value'),
+    optionalexpensesValue = document.querySelector('.optionalexpenses-value'),
+    incomeValue = document.querySelector('.income-value'),
+    monthsavingsValue = document.querySelector('.monthsavings-value'),
+    yearsavingsValue = document.querySelector('.yearsavings-value');
 
 // · Получить поля(input) c обязательными расходами через класс.(class = ”expenses - item”)
 let expensesItem = document.querySelectorAll('.expenses-item');

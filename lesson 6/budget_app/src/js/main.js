@@ -34,9 +34,17 @@ let chooseIncome = document.querySelector('.choose-income'),
     monthValue = document.querySelector('.month-value'),
     dayValue = document.querySelector('.day-value');
 
+let expensesSum1 = document.getElementById('expenses_1'),
+    expensesSum2 = document.getElementById('expenses_2'),
+    expensesSum3 = document.getElementById('expenses_3'),
+    expensesSum4 = document.getElementById('expenses_4');
+
+
 //Нажимаем на кнопку Начать расчет
 let money, time;
 startBtn.addEventListener('click', function() {
+
+
     time = prompt("Введите дату в формате YYYY-MM-DD", "");
     money = +prompt("Ваш бюджет на месяц", "");
 
@@ -52,23 +60,58 @@ startBtn.addEventListener('click', function() {
     dayValue.value = new Date(Date.parse(time)).getDate();
 });
 
+//Блокирование кнопки утрвердить в обязательных расходах
+expensesSum1.addEventListener('change', function() {
+    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
+        expensesItemBtn.disabled = true;
+    } else {
+        expensesItemBtn.disabled = false;
+    }
+});
+expensesSum2.addEventListener('change', function() {
+    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
+        expensesItemBtn.disabled = true;
+    } else {
+        expensesItemBtn.disabled = false;
+    }
+});
+expensesSum3.addEventListener('change', function() {
+    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
+        expensesItemBtn.disabled = true;
+    } else {
+        expensesItemBtn.disabled = false;
+    }
+});
+
+expensesSum4.addEventListener('change', function() {
+    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
+        expensesItemBtn.disabled = true;
+    } else {
+        expensesItemBtn.disabled = false;
+    }
+});
+
 // вводим и записываем результаты ввода в блок "Введите обязательные расходы"
 expensesItemBtn.addEventListener('click', function() {
     let sum = 0;
+    if (expensesSum1.value != '' && expensesSum2.value != '' && expensesSum3.value != '' && expensesSum4.value != '') {
+        for (let i = 0; i < expensesItem.length; i++) {
+            let a = expensesItem[i].value,
+                b = expensesItem[++i].value;
 
-    for (let i = 0; i < expensesItem.length; i++) {
-        let a = expensesItem[i].value,
-            b = expensesItem[++i].value;
-
-        if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-            appData.expenses[a] = b;
-            sum += +b;
-        } else {
-            i--;
+            if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+                appData.expenses[a] = b;
+                sum += +b;
+            } else {
+                i--;
+            }
         }
+        expensesValue.textContent = sum;
+    } else {
+        expensesItemBtn.disabled = true;
     }
-    expensesValue.textContent = sum;
 });
+
 
 // вводим и записываем результаты ввода в блок "Введите необязательные расходы"
 optionalexpensesBtn.addEventListener('click', function() {
@@ -83,7 +126,7 @@ optionalexpensesBtn.addEventListener('click', function() {
 // расчет дневного бюджета
 countBtn.addEventListener('click', function() {
     if (appData.budjet != undefined) {
-        appData.moneyPerDay = (appData.budjet / 30).toFixed();
+        appData.moneyPerDay = ((+appData.budjet - +expensesValue.textContent) / 30).toFixed();
         daybudgetValue.textContent = appData.moneyPerDay;
 
         if (appData.moneyPerDay < 100) {

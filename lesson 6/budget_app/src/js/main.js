@@ -62,60 +62,51 @@ startBtn.addEventListener('click', function() {
 });
 
 //Блокирование кнопки утрвердить в обязательных расходах
-expensesSum1.addEventListener('change', function() {
-    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
-        expensesItemBtn.disabled = true;
-    } else {
-        expensesItemBtn.disabled = false;
-    }
-});
-expensesSum2.addEventListener('change', function() {
-    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
-        expensesItemBtn.disabled = true;
-    } else {
-        expensesItemBtn.disabled = false;
-    }
-});
-expensesSum3.addEventListener('change', function() {
-    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
-        expensesItemBtn.disabled = true;
-    } else {
-        expensesItemBtn.disabled = false;
-    }
+
+expensesItemBtn.disabled = true;
+expensesItem.forEach(function(item) {
+    item.addEventListener('mouseleave', function() {
+        if (item.value == '') {
+            expensesItemBtn.disabled = true;
+        } else {
+            expensesItemBtn.disabled = false;
+        }
+    });
 });
 
-expensesSum4.addEventListener('change', function() {
-    if (expensesSum1.value == '' && expensesSum2.value == '' && expensesSum3.value == '' && expensesSum4.value == '') {
-        expensesItemBtn.disabled = true;
-    } else {
-        expensesItemBtn.disabled = false;
-    }
-});
 
 // вводим и записываем результаты ввода в блок "Введите обязательные расходы"
 expensesItemBtn.addEventListener('click', function() {
     let sum = 0;
-    if (expensesSum1.value != '' && expensesSum2.value != '' && expensesSum3.value != '' && expensesSum4.value != '') {
-        for (let i = 0; i < expensesItem.length; i++) {
-            let a = expensesItem[i].value,
-                b = expensesItem[++i].value;
+    for (let i = 0; i < expensesItem.length; i++) {
+        let a = expensesItem[i].value,
+            b = expensesItem[++i].value;
 
-            if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-                appData.expenses[a] = b;
-                sum += +b;
-            } else {
-                i--;
-            }
+        if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+            appData.expenses[a] = b;
+            sum += +b;
+        } else {
+            i--;
         }
-        expensesValue.textContent = sum;
-    } else {
-        expensesItemBtn.disabled = true;
     }
+    expensesValue.textContent = sum;
 });
 
+//Проверки на поле необязательных расходов
+optionalexpensesBtn.disabled = true;
+optionalexpensesItem.forEach(function(item) {
+    item.addEventListener('mouseleave', function() {
+        if (item.value == '') {
+            optionalexpensesBtn.disabled = true;
+        } else {
+            optionalexpensesBtn.disabled = false;
+        }
+    });
+});
 
 // вводим и записываем результаты ввода в блок "Введите необязательные расходы"
 optionalexpensesBtn.addEventListener('click', function() {
+    optionalexpensesBtn.disabled = true;
     for (let i = 0; i < optionalexpensesItem.length; i++) {
         let answerQuestion = optionalexpensesItem[i].value;
 

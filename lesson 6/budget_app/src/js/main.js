@@ -53,6 +53,7 @@ startBtn.addEventListener('click', function() {
     }
 
     appData.budjet = money;
+    countBtn.disabled = false;
     appData.timeData = time;
     budgetValue.textContent = money.toFixed();
     yearValue.value = new Date(Date.parse(time)).getFullYear();
@@ -139,7 +140,7 @@ countBtn.addEventListener('click', function() {
             levelValue.textContent = "Произошла ошибка";
         }
     } else {
-        daybudgetValue.textContent = 'Произошла ошибка';
+        countBtn.disabled = true;
     }
 });
 

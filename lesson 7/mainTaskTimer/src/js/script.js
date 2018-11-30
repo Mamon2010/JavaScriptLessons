@@ -1,14 +1,10 @@
 // Простой таймер
 
 function getTimer() {
-    let date = new Date(),
-        hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
-        minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
-        seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds(),
-        h1 = document.querySelector('.time');
-
-    h1.innerText = hours + ':' + minutes + ':' + seconds;
-
+    let h1 = document.querySelector('.time');
+    var time = (new Date()).toLocaleTimeString("ru-RU", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+    time = ("0" + time).slice(-8);
+    h1.innerText = time;
     setTimeout(getTimer, 1000);
 }
 

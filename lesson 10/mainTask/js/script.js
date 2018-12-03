@@ -95,11 +95,15 @@ let more = document.querySelector('.more'),
     overlay = document.querySelector('.overlay'),
     close = document.querySelector('.popup-close');
 
-more.addEventListener('click', () => {
+let showModalContent = () => {
     overlay.style.display = 'block';
-    this.classList.add('more-splash');
+    more.classList.add('more-splash');
     // заблокировать прокрутку при открытом модальном окне
     document.body.style.overflow = 'hidden';
+};
+
+more.addEventListener('click', () => {
+    showModalContent();
 });
 
 close.addEventListener('click', () => {
@@ -114,9 +118,7 @@ let descriptionBtn = document.querySelectorAll('.description-btn');
 
 descriptionBtn.forEach((item) => {
     item.addEventListener('click', () => {
-        overlay.style.display = 'block';
-        this.classList.add('more-splash');
-        document.body.style.overflow = 'hidden';
+        showModalContent();
     });
 });
 

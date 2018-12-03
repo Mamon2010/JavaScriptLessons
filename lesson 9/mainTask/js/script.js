@@ -94,32 +94,34 @@ let more = document.querySelector('.more'),
     overlay = document.querySelector('.overlay'),
     close = document.querySelector('.popup-close');
 
-    more.addEventListener('click', function(){
-        overlay.style.display = 'block';
-        this.classList.add('more-splash');
-        // заблокировать прокрутку при открытом модальном окне
-        document.body.style.overflow = 'hidden';
-    });
+let showModalContent = () => {
+    overlay.style.display = 'block';
+    more.classList.add('more-splash');
+    // заблокировать прокрутку при открытом модальном окне
+    document.body.style.overflow = 'hidden';
+};
 
-    close.addEventListener('click', function(){
-        overlay.style.display = 'none';
-        more.classList.remove('more-splash');
-        // разблокировать прокрутку при открытом модальном окне
-        document.body.style.overflow = '';
-    });
+more.addEventListener('click', function() {
+    showModalContent();
+});
+
+close.addEventListener('click', function() {
+    overlay.style.display = 'none';
+    more.classList.remove('more-splash');
+    // разблокировать прокрутку при открытом модальном окне
+    document.body.style.overflow = '';
+});
 
 // Модальное окно на каждую кнопку Узнать подробнее
-    let descriptionBtn = document.querySelectorAll('.description-btn');
+let descriptionBtn = document.querySelectorAll('.description-btn');
 
-    descriptionBtn.forEach(function(item){
-        item.addEventListener('click', function(){
-            overlay.style.display = 'block';
-            this.classList.add('more-splash');
-            document.body.style.overflow = 'hidden';
-        });
+descriptionBtn.forEach(function(item) {
+    item.addEventListener('click', function() {
+        showModalContent();
     });
-        
-    
+});
+
+
 
 
 // пишем табы на фото

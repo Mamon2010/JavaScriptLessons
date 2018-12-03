@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', () => {
 
     'use strict';
 
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    info.addEventListener('click', function (event) {
+    info.addEventListener('click', (event) => {
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for (let i = 0; i < tab.length; i++) {
@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Timer
 
-    let deadline = '2018-12-03';
+    let deadline = '2018-12-04';
 
     let getTimeRemaining = (endtime) => {
         let d = new Date().getTimezoneOffset() * 60 * 1000,
@@ -95,14 +95,14 @@ let more = document.querySelector('.more'),
     overlay = document.querySelector('.overlay'),
     close = document.querySelector('.popup-close');
 
-more.addEventListener('click', function () {
+more.addEventListener('click', () => {
     overlay.style.display = 'block';
     this.classList.add('more-splash');
     // заблокировать прокрутку при открытом модальном окне
     document.body.style.overflow = 'hidden';
 });
 
-close.addEventListener('click', function () {
+close.addEventListener('click', () => {
     overlay.style.display = 'none';
     more.classList.remove('more-splash');
     // разблокировать прокрутку при открытом модальном окне
@@ -112,8 +112,8 @@ close.addEventListener('click', function () {
 // Модальное окно на каждую кнопку Узнать подробнее
 let descriptionBtn = document.querySelectorAll('.description-btn');
 
-descriptionBtn.forEach(function (item) {
-    item.addEventListener('click', function () {
+descriptionBtn.forEach((item) => {
+    item.addEventListener('click', () => {
         overlay.style.display = 'block';
         this.classList.add('more-splash');
         document.body.style.overflow = 'hidden';

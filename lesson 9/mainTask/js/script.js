@@ -101,9 +101,7 @@ let showModalContent = () => {
     document.body.style.overflow = 'hidden';
 };
 
-more.addEventListener('click', function() {
-    showModalContent();
-});
+more.addEventListener('click', showModalContent);
 
 close.addEventListener('click', function() {
     overlay.style.display = 'none';
@@ -116,9 +114,7 @@ close.addEventListener('click', function() {
 let descriptionBtn = document.querySelectorAll('.description-btn');
 
 descriptionBtn.forEach(function(item) {
-    item.addEventListener('click', function() {
-        showModalContent();
-    });
+    item.addEventListener('click', showModalContent);
 });
 
 

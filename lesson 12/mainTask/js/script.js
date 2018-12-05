@@ -132,7 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
     statusMessage.classList.add('status');
 
     let formContact = document.getElementById('form'),
-        inputContact = formContact.getElementsByTagName('input');
+        inputContact = document.querySelectorAll('[type = tel]');
 
     //Функция для реквеста
     function httpRequest(form) {
@@ -160,12 +160,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 
                     request.addEventListener('readystatechange', function() {
-                        if (request.readyState < 4) {
-                            resolve();
-                        } else if (request.readyState === 4 && request.status == 200) {
-                            resolve();
-                        } else {
-                            reject();
+                        if (request.readyState === 4) {
+                            if (request.status == 200) {
+                                resolve();
+                            } else {
+                                reject();
+                            }
                         }
                     });
                     request.send(data);
@@ -180,7 +180,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             sendData(json)
-                .then(() => statusMessage.innerHTML = message.loading)
+                // .then(() => statusMessage.innerHTML = message.loading)
                 .then(() => statusMessage.innerHTML = message.success)
                 .catch(() => statusMessage.innerHTML = message.failture)
                 .then(clearInput);
@@ -195,17 +195,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Функция для валидации номера телефона
     let validatePhone = (input) => {
-        return /^(8|\+7)\d{0,10}|^\+\d{0,11}/.test(input.value);
+        return /^(8|\+7|\+)\d{0,10}$/.test(input.value);
     };
 
     //Валидация телефона
-    inputContact[1].addEventListener('input', () => {
-        if (!validatePhone(inputContact[1])) {
-            // event.preventDefault();
-            inputContact[1].value = inputContact[1].value.slice(0, -1);
-        } else {
-            inputContact[1].value = inputContact[1].value;
-        }
+    inputContact.forEach((item) => {
+        item.addEventListener('input', () => {
+            if (!validatePhone(item)) {
+                // event.preventDefault();
+                item.value = item.value.slice(0, -1);
+            } else {
+                item.value = item.value;
+            }
+        });
     });
 
 });

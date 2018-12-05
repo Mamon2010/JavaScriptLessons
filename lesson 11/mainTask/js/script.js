@@ -118,23 +118,30 @@ window.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', showModalContent);
     });
 
-    // Form 
-
+    // Элементы формы общие для Modal и Contact
     let message = {
         loading: 'Загрузка...',
         success: 'Спасибо, скоро мы с вами свяжемся!',
         failture: 'Что то пошло не так...'
     };
 
+    //Элементы формы Modal
+    let form = document.querySelector('.main-form'),
+        input = form.getElementsByTagName('input'),
+        statusMessage = document.createElement('div');
+
+    statusMessage.classList.add('status');
+
+    //Элементы формы Contact
+    let formContact = document.getElementById('form'),
+        inputContact = formContact.getElementsByTagName('input');
+
     //Функция для реквеста
-    let httpRequest = (form, input) => {
+    let httpRequest = (form) => {
         event.preventDefault();
         form.appendChild(statusMessage);
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-
+        //подготовка данных для отправки
         let formData = new FormData(form);
 
         let obj = {};
@@ -144,8 +151,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let json = JSON.stringify(obj);
 
+        //отправка данных на сервер
+        let request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         request.send(json);
 
+        //обработка ответа от сервера
         request.addEventListener('readystatechange', function() {
             if (request.readyState < 4) {
                 statusMessage.innerHTML = message.loading;
@@ -163,46 +175,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Функция для валидации номера телефона
     let validatePhone = (input) => {
-        let arr = [];
-
-        for (let i = 0; i < input.length; i++) {
-            arr.push(input.charAt([i]));
-            if (isNaN(parseInt(arr[i])) && arr[i] != '+') {
-                return false;
-            }
-        }
-        return true;
+        return /^(8|\+7)\d{0,10}|^\+\d{0,11}/.test(input.value);
     };
 
     // Form Modal
-    let form = document.querySelector('.main-form'),
-        input = form.getElementsByTagName('input'),
-        statusMessage = document.createElement('div');
-
-    statusMessage.classList.add('status');
-
-    form.addEventListener('submit', () => {
-        httpRequest(form, input);
+    form.addEventListener('submit', function() {
+        httpRequest(this);
     });
 
 
     // Form Contact
-    let formContact = document.getElementById('form'),
-        inputContact = formContact.getElementsByTagName('input');
-
-    formContact.addEventListener('submit', () => {
-        httpRequest(formContact, inputContact);
+    formContact.addEventListener('submit', function() {
+        httpRequest(this);
     });
 
     //Валидация телефона
-    inputContact[1].addEventListener('keyup', () => {
-        if (!validatePhone(inputContact[1].value)) {
-            inputContact[1].value = '';
+    inputContact[1].addEventListener('input', () => {
+        if (!validatePhone(inputContact[1])) {
+            // event.preventDefault();
+            inputContact[1].value = inputContact[1].value.slice(0, -1);
         } else {
             inputContact[1].value = inputContact[1].value;
         }
     });
-
-
 
 });

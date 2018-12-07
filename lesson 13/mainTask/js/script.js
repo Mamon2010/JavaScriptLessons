@@ -272,19 +272,14 @@ window.addEventListener('DOMContentLoaded', () => {
         totalValue = document.getElementById('total'),
         personsSum = 0,
         daysSum = 0,
-        total = 0;
+        total = 0,
+        counterInput = document.querySelectorAll('.counter-block-input');
 
     totalValue.innerHTML = 0;
 
-    function validate(value) {
-        return /([\+] |\d)$/.test(value);
-    }
 
     //Обработчик на кол-ве людей
-    persons.addEventListener('change', function() {
-        if (!validate(persons)) {
-            persons.innerHTML.slice(0, -1);
-        }
+    persons.addEventListener('input', function() {
 
         personsSum = +this.value;
         if (personsSum == 0) {
@@ -325,5 +320,14 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    counterInput.forEach(function(item) {
+        item.addEventListener('input', function() {
+            if (/(\d)$/.test(item.value)) {
+                item.value = item.value;
+            } else {
+                item.value = item.value.slice(0, -1);
+            }
+        });
+    });
 
 });

@@ -278,61 +278,34 @@ window.addEventListener('DOMContentLoaded', () => {
 
     totalValue.innerHTML = 0;
 
-    function calculator(day, person, place) {
-        //Обработчик на кол-ве людей
-        person.addEventListener('change', function() {
-            personsSum = +this.value;
-            if (personsSum == 0) {
-                total = 0;
-            } else {
-                total = (daysSum + personsSum) * 4000;
-            }
+    function calculator(person, day, place) {
 
-            if (restDays.value == '') {
-                totalValue.innerHTML = 0;
-            } else {
-                totalValue.innerHTML = total;
-            }
-        });
+        let personCount = +person.value,
+            daysCount = +day.value,
+            placeCount = +place.options[place.selectedIndex].value;
 
-        //Обработчик на кол-ве дней
-        day.addEventListener('change', function() {
-            daysSum = +this.value;
-            if (daysSum == 0) {
-                total = 0;
-            } else {
-                total = (daysSum + personsSum) * 4000;
-            }
+        total = (personCount + daysCount) * 4000 * placeCount;
 
-            if (person.value == '') {
-                totalValue.innerHTML = 0;
-            } else {
-                totalValue.innerHTML = total;
-            }
-        });
-
-        //огбработчик на месте
-        place.addEventListener('change', function() {
-            if (person.value == '' || day.value == '') {
-                totalValue.innerHTML = 0;
-            } else {
-                let a = total;
-                totalValue.innerHTML = a * this.options[this.selectedIndex].value;
-            }
-        });
-
+        if (personCount && daysCount) {
+            totalValue.innerHTML = total;
+        } else {
+            totalValue.innerHTML = 0;
+        }
     }
+
+    //огбработчик на месте
+    place.addEventListener('change', function() {
+        calculator(persons, restDays, place);
+    });
 
     counterInput.forEach(function(item) {
         item.removeAttribute('type');
         item.addEventListener('input', function() {
-            if (/(\d)$/.test(item.value)) {
-                item.value = item.value;
-            } else {
+            if (/(\D)$/.test(item.value)) {
                 item.value = item.value.slice(0, -1);
             }
+            calculator(persons, restDays, place);
         });
     });
 
-    calculator(restDays, persons, place);
 });

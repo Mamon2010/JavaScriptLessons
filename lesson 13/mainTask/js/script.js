@@ -275,52 +275,56 @@ window.addEventListener('DOMContentLoaded', () => {
         total = 0,
         counterInput = document.querySelectorAll('.counter-block-input');
 
+
     totalValue.innerHTML = 0;
 
+    function calculator(day, person, place) {
+        //Обработчик на кол-ве людей
+        person.addEventListener('change', function() {
+            personsSum = +this.value;
+            if (personsSum == 0) {
+                total = 0;
+            } else {
+                total = (daysSum + personsSum) * 4000;
+            }
 
-    //Обработчик на кол-ве людей
-    persons.addEventListener('input', function() {
+            if (restDays.value == '') {
+                totalValue.innerHTML = 0;
+            } else {
+                totalValue.innerHTML = total;
+            }
+        });
 
-        personsSum = +this.value;
-        if (personsSum == 0) {
-            total = 0;
-        } else {
-            total = (daysSum + personsSum) * 4000;
-        }
+        //Обработчик на кол-ве дней
+        day.addEventListener('change', function() {
+            daysSum = +this.value;
+            if (daysSum == 0) {
+                total = 0;
+            } else {
+                total = (daysSum + personsSum) * 4000;
+            }
 
-        if (restDays.value == '') {
-            totalValue.innerHTML = 0;
-        } else {
-            totalValue.innerHTML = total;
-        }
-    });
+            if (person.value == '') {
+                totalValue.innerHTML = 0;
+            } else {
+                totalValue.innerHTML = total;
+            }
+        });
 
-    //Обработчик на кол-ве дней
-    restDays.addEventListener('change', function() {
-        daysSum = +this.value;
-        if (daysSum == 0) {
-            total = 0;
-        } else {
-            total = (daysSum + personsSum) * 4000;
-        }
+        //огбработчик на месте
+        place.addEventListener('change', function() {
+            if (person.value == '' || day.value == '') {
+                totalValue.innerHTML = 0;
+            } else {
+                let a = total;
+                totalValue.innerHTML = a * this.options[this.selectedIndex].value;
+            }
+        });
 
-        if (persons.value == '') {
-            totalValue.innerHTML = 0;
-        } else {
-            totalValue.innerHTML = total;
-        }
-    });
-
-    place.addEventListener('change', function() {
-        if (persons.value == '' || restDays.value == '') {
-            totalValue.innerHTML = 0;
-        } else {
-            let a = total;
-            totalValue.innerHTML = a * this.options[this.selectedIndex].value;
-        }
-    });
+    }
 
     counterInput.forEach(function(item) {
+        item.removeAttribute('type');
         item.addEventListener('input', function() {
             if (/(\d)$/.test(item.value)) {
                 item.value = item.value;
@@ -330,4 +334,5 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    calculator(restDays, persons, place);
 });

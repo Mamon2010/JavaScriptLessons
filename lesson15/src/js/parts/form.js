@@ -62,7 +62,11 @@ let form = function() {
                 // .then(() => statusMessage.innerHTML = message.loading)
                 .then(() => statusMessage.innerHTML = message.success)
                 .catch(() => statusMessage.innerHTML = message.failture)
-                .then(clearInput);
+                .then(clearInput)
+                .then(setTimeout(() => {
+                    // $('.status').remove();
+                    document.querySelector('form .status').remove();
+                }, 3000));
         });
     }
 

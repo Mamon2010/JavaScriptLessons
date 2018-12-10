@@ -183,7 +183,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 // .then(() => statusMessage.innerHTML = message.loading)
                 .then(() => statusMessage.innerHTML = message.success)
                 .catch(() => statusMessage.innerHTML = message.failture)
-                .then(clearInput);
+                .then(clearInput)
+                .then(setTimeout(() => {
+                    $('.status').remove();
+                }, 3000));
         });
     }
 
@@ -270,14 +273,13 @@ window.addEventListener('DOMContentLoaded', () => {
         restDays = document.querySelectorAll('.counter-block-input')[1],
         place = document.getElementById('select'),
         totalValue = document.getElementById('total'),
-        personsSum = 0,
-        daysSum = 0,
         total = 0,
         counterInput = document.querySelectorAll('.counter-block-input');
 
 
     totalValue.innerHTML = 0;
 
+    //функция расчета калькулятора
     function calculator(person, day, place) {
 
         let personCount = +person.value,
@@ -293,7 +295,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    //огбработчик на месте
+    //обработчик на месте
     place.addEventListener('change', function() {
         calculator(persons, restDays, place);
     });

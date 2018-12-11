@@ -65,7 +65,11 @@ startBtn.addEventListener('click', function() {
 
 expensesItemBtn.disabled = true;
 expensesItem.forEach(function(item) {
-    item.addEventListener('mouseleave', function() {
+    item.addEventListener('input', function() {
+        if (!validateSum(item.value) || !validateSum(item.value)) {
+            item.value = this.value.slice(0, -1);
+        }
+
         if (item.value == '') {
             expensesItemBtn.disabled = true;
         } else {
@@ -74,6 +78,9 @@ expensesItem.forEach(function(item) {
     });
 });
 
+function validateSum(input) {
+    return /\d$/.test(input);
+}
 
 // вводим и записываем результаты ввода в блок "Введите обязательные расходы"
 expensesItemBtn.addEventListener('click', function() {
@@ -92,10 +99,18 @@ expensesItemBtn.addEventListener('click', function() {
     expensesValue.textContent = sum;
 });
 
+function validateOptionalInput(input) {
+    return /[а-яА-Я]$/.test(input.value);
+}
 //Проверки на поле необязательных расходов
+//1) Сделать так, чтобы в поля "необязательные расходы" можно было использовать только русские буквы
 optionalexpensesBtn.disabled = true;
 optionalexpensesItem.forEach(function(item) {
-    item.addEventListener('mouseleave', function() {
+    item.addEventListener('input', function() {
+        if (!validateOptionalInput(item)) {
+            item.value = item.value.slice(0, -1);
+        }
+
         if (item.value == '') {
             optionalexpensesBtn.disabled = true;
         } else {
@@ -107,6 +122,8 @@ optionalexpensesItem.forEach(function(item) {
 // вводим и записываем результаты ввода в блок "Введите необязательные расходы"
 optionalexpensesBtn.addEventListener('click', function() {
     optionalexpensesBtn.disabled = true;
+    //  При повторном нажатии на кнопку “Утвердить” - необязательные расходы не перезаписываются заново
+    optionalexpensesValue.textContent = '';
     for (let i = 0; i < optionalexpensesItem.length; i++) {
         let answerQuestion = optionalexpensesItem[i].value;
 

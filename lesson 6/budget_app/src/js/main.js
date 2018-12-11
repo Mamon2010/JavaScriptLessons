@@ -66,8 +66,10 @@ startBtn.addEventListener('click', function() {
 expensesItemBtn.disabled = true;
 expensesItem.forEach(function(item) {
     item.addEventListener('input', function() {
-        if (!validateSum(item.value) || !validateSum(item.value)) {
-            item.value = this.value.slice(0, -1);
+        if (item.id == 'expenses_2' || item.id == 'expenses_4') {
+            if (!validateSum(item.value)) {
+                item.value = this.value.slice(0, -1);
+            }
         }
 
         if (item.value == '') {

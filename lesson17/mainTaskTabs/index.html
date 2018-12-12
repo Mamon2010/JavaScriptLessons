@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Окно с табами</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/game.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/password.css" />
+</head>
+
+<body>
+    <div class="tabs">
+
+        <ul class="tabs__caption">
+            <li class="active">Слайдер</li>
+            <li>Игра</li>
+            <li>Генератор паролей</li>
+        </ul>
+
+        <div class="tabs__content active">
+            <div class="galleria">
+                <img src="../mainTaskTabs/photo/photo1.jpg">
+                <img src="../mainTaskTabs/photo/photo2.jpg">
+                <img src="../mainTaskTabs/photo/photo3.jpg">
+            </div>
+        </div>
+
+        <div class="tabs__content">
+            <div class='gameCenter'>
+                <div class="init">
+                    <div class="center1">
+                        <h1>WE NEED YOU!</h1>
+                        <p>Click on each square to plant a tree. You must hurry or the factories will colonize us!</p>
+                        <p class="floating bold">START GAME</p>
+                    </div>
+                </div>
+                <div class="won">
+                    <div class="center">
+                        <h1>YOU WON!</h1>
+                        <p class="floating replay bold">save the World again</p>
+                    </div>
+                </div>
+                <div class="init hidden">
+                    <h1 class="center">INCREASED VELOCITY!</h1>
+                </div>
+                <!-- <h2 class="counter">Level: 1</h2> -->
+                <div class="container">
+                    <div class="game"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tabs__content">
+            <div class="genpassword">
+                <div id="app">
+                    <section class="wrapper">
+                        <h1>The Password Genie</h1>
+                        <div class="password-box">
+                            <span id="password" class="password" v-on:click="copyToClipboard">{{ password }}</span>
+                            <span class="regenerate-password" v-on:click="generatePassword"></span>
+                            <span class="copy-password" v-on:click="copyToClipboard"></span>
+                            <span class="tooltip" v-if="copied">Password copied successfuly!</span>
+                        </div>
+                        <form @keydown.enter.prevent="">
+                            <div class="field-wrap">
+                                <label>Strength</label>
+                                <span class="range-value">{{strength.text}}</span>
+                                <div class="range-slider_wrapper slider-strength" v-bind:class="strength.text">
+                                    <span class="slider-bar" v-bind:style="{ width: strength.score + '%' }"></span>
+                                    <input type="range" class="range-slider" min="0" max="100" v-model="strength.score" disabled>
+                                </div>
+                            </div>
+                            <div class="seperator"></div>
+                            <div class="field-wrap">
+                                <label>Length</label>
+                                <span class="range-value">{{settings.length}}</span>
+                                <div class="range-slider_wrapper">
+                                    <span class="slider-bar" v-bind:style="{ width: lengthThumbPosition + '%' }"></span>
+                                    <input type="range" class="range-slider" min="6" v-bind:max="settings.maxLength" v-model="settings.length">
+                                </div>
+                            </div>
+                            <div class="field-wrap">
+                                <label>Digits</label>
+                                <span class="range-value">{{settings.digits}}</span>
+                                <div class="range-slider_wrapper">
+                                    <span class="slider-bar" v-bind:style="{ width: digitsThumbPosition + '%' }"></span>
+                                    <input type="range" class="range-slider" min="0" v-bind:max="settings.maxDigits" v-model="settings.digits">
+                                </div>
+                            </div>
+                            <div class="field-wrap">
+                                <label>Symbols</label>
+                                <span class="range-value">{{settings.symbols}}</span>
+                                <div class="range-slider_wrapper">
+                                    <span class="slider-bar" v-bind:style="{ width: symbolsThumbPosition + '%' }"></span>
+                                    <input type="range" class="range-slider" min="0" v-bind:max="settings.maxSymbols" v-model="settings.symbols">
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- .tabs-->
+
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/mojs/latest/mo.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'></script>
+    <script src="./js/password.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/game.js"></script>
+</body>
+
+</html>

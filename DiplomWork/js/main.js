@@ -1,5 +1,3 @@
-"use strict";
-
 import modalView from './parts/modalView';
 import sendForm from './parts/form';
 

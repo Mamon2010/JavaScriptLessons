@@ -1,3 +1,5 @@
+"use strict";
+
 function modalView() {
 
     //Общие функции открытия/закрытия модальных окон
@@ -6,12 +8,16 @@ function modalView() {
         document.body.style.overflow = 'hidden';
     }
 
-    function closeModalView(close_dialog) {
+    function closeModalView(closeDialog) {
         popupClose.forEach((item) => {
             item.addEventListener('click', () => {
-                close_dialog.style.display = 'none';
+                closeDialog.style.display = 'none';
                 document.body.style.overflow = '';
             });
+        });
+        closeDialog.addEventListener('click', () => {
+            closeDialog.style.display = 'none';
+            document.body.style.overflow = '';
         });
     }
 
@@ -20,7 +26,8 @@ function modalView() {
         popupEngineer = document.querySelector('.popup_engineer'),
         popupClose = document.querySelectorAll('.popup_close');
 
-    headerBtn.addEventListener('click', () => {
+    headerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         showModalView(popupEngineer);
     });
 
@@ -31,17 +38,17 @@ function modalView() {
     let phoneBackLink = document.querySelector('.phone_link'),
         popup = document.querySelector('.popup');
 
-    phoneBackLink.addEventListener('click', () => {
+    phoneBackLink.addEventListener('click', (e) => {
+        e.preventDefault();
         showModalView(popup);
     });
-
-    closeModalView(popup);
 
     // модальное окно Спросите у нашего специалиста!
 
     let feedbackPhoneLink = document.querySelector('.phone_link_question');
 
-    feedbackPhoneLink.addEventListener('click', () => {
+    feedbackPhoneLink.addEventListener('click', (e) => {
+        e.preventDefault();
         showModalView(popup);
     });
 

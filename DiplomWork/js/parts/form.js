@@ -1,3 +1,5 @@
+"use strict";
+
 function sendForm() {
 
     let message = {
